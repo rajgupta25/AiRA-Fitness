@@ -3,8 +3,8 @@ import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
-const roots = ['src', 'skills', 'tests', 'scripts', 'docs', 'runs', 'evidence', 'prompts', 'examples'];
-const topFiles = ['README.md', 'AGENTS.md', 'package.json', 'package-lock.json', 'tsconfig.json', 'playwright.config.mjs', '.env.example', '.gitignore', '.starter-baseline.json'];
+const roots = ['src', 'skills', 'tests', 'scripts', 'docs', 'runs', 'evidence', 'prompts', 'examples', 'api'];
+const topFiles = ['README.md', 'AGENTS.md', 'package.json', 'package-lock.json', 'tsconfig.json', 'playwright.config.mjs', '.env.example', '.gitignore', '.starter-baseline.json', 'vercel.json'];
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 export async function collect(root) {
   const files = [];
@@ -14,7 +14,7 @@ export async function collect(root) {
     if (stat.isSymbolicLink()) throw new Error(`Refusing symbolic link: ${relative}`);
     if (stat.isDirectory()) {
       for (const name of (await readdir(path)).sort()) {
-        if (name.startsWith('.') || /^(node_modules|dist|output|test-results|playwright-report)$/.test(name)) continue;
+        if (name.startsWith('.') || /^(node_modules|dist|output|public|test-results|playwright-report)$/.test(name)) continue;
         await visit(`${relative}/${name}`);
       }
       return;

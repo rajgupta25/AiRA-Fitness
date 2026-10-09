@@ -1,7 +1,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { readFile, realpath } from 'node:fs/promises';
 import { join, resolve, extname, sep } from 'node:path';
-import { randomBytes, timingSafeEqual } from 'node:crypto';
+import { randomBytes, timingSafeEqual, createHash } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
 import { APP_VERSION, SCHEMA_VERSION, isRequest, isTurn, type Versions, type Result } from '../shared/contracts.js';
 import { mockTurn } from './mock.js';
@@ -30,14 +30,36 @@ async function readBody(req: IncomingMessage): Promise<unknown> {
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); }
   catch { throw new PublicError('INPUT', 'Send valid JSON.', 400); }
 }
-export function createApp(config: Config, transport: typeof fetch = fetch, cliTransport?: ProcessTransport, cliResolver?: (path: string) => Promise<string>) {
-  const token = randomBytes(32).toString('hex');
+function generateToken(): string {
+  if (process.env.APP_TOKEN) return process.env.APP_TOKEN;
+  if (process.env.VERCEL) {
+    return createHash('sha256').update(process.env.VERCEL_GIT_COMMIT_SHA || process.env.VERCEL_URL || 'aira-fitness-deployment').digest('hex');
+  }
+  return randomBytes(32).toString('hex');
+}
+export function createRequestHandler(
+  config: Config,
+  token = generateToken(),
+  transport: typeof fetch = fetch,
+  cliTransport?: ProcessTransport,
+  cliResolver?: (path: string) => Promise<string>,
+  serverRef?: { address: () => unknown }
+) {
   let active = 0;
-  const server = createServer(async (req, res) => {
-    const address = server.address();
-    const port = typeof address === 'object' && address ? address.port : 4319;
+  return async (req: IncomingMessage, res: ServerResponse) => {
+    const isVercel = Boolean(process.env.VERCEL);
+    const address = serverRef?.address?.();
+    const port = typeof address === 'object' && address && 'port' in address ? (address as { port: number }).port : 4319;
     const hosts = [`127.0.0.1:${port}`, `localhost:${port}`];
-    if (!hosts.includes(req.headers.host ?? '') || (req.headers.origin && !hosts.some(host => req.headers.origin === `http://${host}`)) || req.headers['sec-fetch-site'] === 'cross-site') {
+    const host = req.headers.host ?? '';
+    const origin = req.headers.origin;
+    const allowedHost = isVercel
+      ? (host.length > 0 && !host.includes('/') && !host.includes('\\'))
+      : hosts.includes(host);
+    const allowedOrigin = !origin || (isVercel
+      ? (origin === `https://${host}` || origin === `http://${host}`)
+      : hosts.some(h => origin === `http://${h}`));
+    if (!allowedHost || !allowedOrigin || req.headers['sec-fetch-site'] === 'cross-site') {
       json(res, 403, { error: 'Only this local app may make requests.' }); return;
     }
     try {
@@ -105,8 +127,16 @@ export function createApp(config: Config, transport: typeof fetch = fetch, cliTr
       else if (error instanceof Error && 'code' in error && error.code === 'ENOENT') json(res, 404, { error: 'Required local file was not found. Rebuild and check the skill file.' });
       else json(res, 500, { error: 'The local request failed. Check your skill file or restart the server.' });
     }
+  };
+}
+export function createApp(config: Config, transport: typeof fetch = fetch, cliTransport?: ProcessTransport, cliResolver?: (path: string) => Promise<string>) {
+  let server: ReturnType<typeof createServer>;
+  const handler = createRequestHandler(config, undefined, transport, cliTransport, cliResolver, {
+    address: () => server?.address()
   });
+  server = createServer(handler);
   server.requestTimeout = 10_000;
   server.headersTimeout = 10_000;
   return server;
 }
+
