@@ -5,7 +5,7 @@
   "outputDirectory": "public",
   "functions": {
     "api/**/*.js": {
-      "includeFiles": "dist/**,prompts/**,skills/**,examples/**"
+      "includeFiles": "{dist/**,prompts/**,skills/**,examples/**}"
     }
   },
   "headers": [
