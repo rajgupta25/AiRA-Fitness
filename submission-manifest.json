@@ -1,0 +1,80 @@
+{
+  "format": "workout-source-v1",
+  "appVersion": "2.0.0",
+  "baselinePresent": true,
+  "changedFiles": [
+    {
+      "path": "src/shared/openui/activity-client-events.ts",
+      "status": "modified"
+    },
+    {
+      "path": "evidence/screenshots/01-start.png",
+      "status": "added"
+    },
+    {
+      "path": "evidence/screenshots/02-workout-state.png",
+      "status": "added"
+    },
+    {
+      "path": "evidence/screenshots/03-mobile.png",
+      "status": "added"
+    }
+  ],
+  "skillHash": "fa95dec57cf89342926287056892eceeb220a8aec68706524c8d4a84ef6d4425",
+  "files": {
+    ".env.example": "0ada2353a00f4d42536317ab305de48435492eac5e52863c6c67664a3e64f037",
+    ".gitignore": "2e5bf9b24b8e35f4af719d04fd9354ea6515ce25a21ded012bfda84469ab711f",
+    "AGENTS.md": "0732eec4682840a66d00db360cb54fc5a62fa881fc3e77da9c994cb0a619e3f5",
+    "docs/EXERCISE.md": "b1b5ffc20b5e2d8190e71f1fbb27e70d82e79c11b37603cd09752891a15a5820",
+    "docs/HARNESS.md": "6e602568e09c68c9a965885c216abd2bd1356aba3ded7d5202a32d7bd7eab365",
+    "docs/RUNTIMES.md": "865086d2d31d43c6ba631b7106baad35d01c473bc144653fd541f8b950fd6abf",
+    "evidence/screenshots/01-start.png": "51112c5409b773a755dd3433f9daee15b5dc6400cc21284c39d30ca5fe78a7f2",
+    "evidence/screenshots/02-workout-state.png": "7f5147a39f25802c385fdb99df31e9dafcf590421d1175b6e484673955d845c3",
+    "evidence/screenshots/03-mobile.png": "bbe6e37f0796977e6f204795d8eec85dae7c55136f497c8120fa84a4b4165946",
+    "examples/wiring.openui": "c9b83ae435f3b96c721da9502a5a77b36052bf5035101d56b58fa215a8e54324",
+    "package-lock.json": "ea3dff87ebda23e276a90d9006720a48d2c4e6c8c429bbf80936e9713bb1933d",
+    "package.json": "ee15f2ab75804570cc214f76e757d5cc1866b0c9a0495a6d03196d16ff3ec036",
+    "playwright.config.mjs": "118aac1c8e8f3d40e9b1562b5b88503a34e22568793357ffe89483108b9a6d65",
+    "prompts/context.md": "e4732a5acd27c946e8ee18f967b3d5a7b3de158036be98542fc2f73e46130c73",
+    "prompts/system.md": "cda5716bc1d0793b171ec52969e06ac47a1ae771e1cd6a539b11c82b832688c8",
+    "README.md": "b2c68b5f77470762ee57b7f85feb0d6a74445c2dc4680f9aa67499b3077c7f94",
+    "scripts/build.mjs": "044dc54fed3c9c7ef29a3ad50575fdcabd1aeaa605f70c2e60ceb750cdd1e564",
+    "scripts/lint.mjs": "c9132cec1cd4d309853355a196baa76c1bd0b2e94b0c745a008bfc0dbb1916f4",
+    "scripts/package.mjs": "57ff07fffe805c5814375e20d9ac4d787d54764357bff40db7c64a6c512b84c6",
+    "skills/workout.md": "fa95dec57cf89342926287056892eceeb220a8aec68706524c8d4a84ef6d4425",
+    "src/server/app.ts": "259212371804a11a36ddd3c1024df70f6ecf02763858af77a1c77b910378d1da",
+    "src/server/cli.ts": "36219d623a44f54a2fa27455e4260eaa17f0e98cfe00092cdd87519c5c929924",
+    "src/server/config.ts": "040d05f96f9ef9fe3557619cc1f9ac9b0e0ab589d6260ab441a6da6010621b51",
+    "src/server/main.ts": "949703463e21f003dd298eaa80d89e09b6ad2475c90569651b7690e746352c2f",
+    "src/server/mock.ts": "d589c01b2de6079fa850aed023c84905ff40cf2d92cdbf188042fec44c80025b",
+    "src/server/prompt.ts": "764ea10d80597f3332319399e11d76ad209859497a715beb7fe86f42c025e602",
+    "src/server/provider.ts": "d8ec6048bddf6485ea5306385d1f935c367032b662ed6218799b53376032f366",
+    "src/server/subprocess.ts": "f0fb9c12f6e371e447974f77dbc577c5db4285edf3d840a18fd8f3d5881e13c7",
+    "src/shared/contracts.ts": "80900b15849f8c1f48ce554a8f7650501f938cb222568b85b81f7b8858a5a0a2",
+    "src/shared/controller.ts": "e0496ba4acfc5e73305fc7169d8609e5fea60784a1d86f721641746dfebc3463",
+    "src/shared/openui/activity-client-events.ts": "56aebb75885476910a0a5dcf3405a2d33dc3609fd61abdb7fa439a9a8c4209ec",
+    "src/shared/openui/document.ts": "b9c1b4720a44f44876d04f0f73e4c4fc707336eb6e7f0937ca7df975d1102d6b",
+    "src/shared/openui/openui-library.ts": "4b68f4706146dfd916348f2484112a122ed5da34ea7d326328186ddf9ddbfea0",
+    "src/shared/openui/openui-model.ts": "631a932cf10fb9ef829ecc9f4f3ef2a42024ebdaac52e6a0212969a7d3fcf836",
+    "src/shared/openui/parse-document.ts": "16d949f7ea7a75dce39ea103b809c8399d026d6d371e501729960b30ac239a34",
+    "src/shared/openui/run-nav.ts": "207f3a5957ba9f154502535b701048981ea2f4dd1165fbf740bbf5ec703fb516",
+    "src/shared/openui/serialize.ts": "34f4ecb5d4efeecb721d17ffebdb6ec2f7b8946c9a8e364be373dc613cdf9ea0",
+    "src/shared/openui/timer-store.ts": "0e442468601db564f4d054bb0dd4f41904594db6d40bd0dc8883580c221f49b0",
+    "src/shared/openui/validate.ts": "3b9a9657eb94ffa5b7b86cddeb9e3655ecece7562e29e1a6af01ec8892998f4d",
+    "src/shared/redact.ts": "126cf5fb154d1cddd0f3eb8f168e89701e80f524c440c537f4fef5b444431222",
+    "src/shared/schema.ts": "d466e4028d754be7729b9eedcf395faf2129406782bdc1aa47a2f89533568bcb",
+    "src/web/app.ts": "798985aebe8158c6546b5fd6febca487379427ccac99e5ea97d1094b60e9e8c3",
+    "src/web/components.ts": "b152aa6dc1c8b3114b33d0a36f54c51a67d0d37a2d86c42fd286a8022ced9f16",
+    "src/web/dom.ts": "59352bc4243ecc84610b69098b956fb1ddc794cc1ebe38b9302d1e166694b401",
+    "src/web/index.html": "a155c80c3385cdcddd5833b28175c4efc64136fb703d18d79b5b4f32e448b939",
+    "src/web/styles.css": "18c56dbfba250f8c560819ad861224d36763a5b31adfda6f2c2675daf4de8a7a",
+    "tests/browser/app.spec.mjs": "da9ccfafd2a4177f34392541489d34b0c8f3a18450eb4c87b8c8973b38124d9c",
+    "tests/cli.test.mjs": "2b9bf2e26ab4dcb0b421925eb5bc7281b1d5dc4e98f40097b26cb1a9b2b8a030",
+    "tests/core.test.mjs": "df8ff8f84535b40c3e25a5bd5b85210ef6b764808cc7e6a7bfb43a5fb204b133",
+    "tests/http.test.mjs": "71c40d456663bf23f2a161841d00f4c12e682b66b6fb5ceef8e265b19d92812d",
+    "tests/package.test.mjs": "31334741b94a966dfa52da9e28d96d77ea451e69c76219fd2e895cd38c2e52c2",
+    "tsconfig.json": "689b9d5e639349067d9542489e0ba9d1a11ca1581fa51934a55d46bf41e76626"
+  },
+  "runFiles": [],
+  "note": "Credentials, .env, dependencies, build caches and repository history are excluded. Inspect this archive before sharing. Run model/config versions are in runs/*.json."
+}

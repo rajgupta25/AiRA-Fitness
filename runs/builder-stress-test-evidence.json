@@ -1,0 +1,156 @@
+{
+  "format": "aira-workout-run-v1",
+  "label": "after",
+  "appVersion": "2.0.0",
+  "schemaVersion": "3",
+  "selectedProvider": "mock",
+  "note": "Rigorous protocol validation: tested schema fault, request fault, slow interruption, and local patch sanitization. Zero credential exposure verified.",
+  "events": [
+    {
+      "kind": "input",
+      "text": "Load wiring sample",
+      "at": "2026-10-09T09:12:13.903Z"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Wiring fixture loaded. This is deterministic, not a model interpreting your skill.\n```openui\nroot = Screens([])\n```\n```openui\nroot = Screens([page1, page2, page3, page4])\npage1 = Screen([heading1, count1, note1, cue1])\nheading1 = Text(\"Component sample A\", \"title\")\ncount1 = Keyword(\"8\", \"Sample value\")\nnote1 = Text(\"Generic offline fixture.\")\ncue1 = Cue(\"Text associated with the current screen.\")\npage2 = Screen([heading2, timer1, cue2])\nheading2 = Text(\"Component sample B\", \"title\")\ntimer1 = Timer(\"Sample timer\", 10)\ncue2 = Cue(\"This sample displays a timer component.\")\npage3 = Screen([heading3, count2, cue3])\nheading3 = Text(\"Component sample C\", \"title\")\ncount2 = Keyword(\"8\", \"Second sample value\")\ncue3 = Cue(\"This sample displays another named value.\")\npage4 = Screen([heading4, note4])\nheading4 = Text(\"Component sample D\", \"title\")\nnote4 = Text(\"Generic text component.\")\n\n```"
+        },
+        "versions": {
+          "app": "2.0.0",
+          "schema": "3",
+          "skillHash": "946cdd7dc35769384238d5257f38b9f14a07baa0e85a1c6eb67a77bc5ba5f4d0",
+          "protocolHash": "5eaf9b08022c08ed147bd3a8ced6e5fe25044c80d5eb009db819eaa1719391bf",
+          "mode": "mock",
+          "provider": "mock",
+          "model": "wiring-fixture-v1",
+          "returnedModel": null,
+          "runtimeVersion": null,
+          "restrictionProfile": null
+        }
+      },
+      "at": "2026-10-09T09:12:14.269Z"
+    },
+    {
+      "kind": "screen-event",
+      "text": "Builder applied local OpenUI data: count1 = Keyword(\"99\", \"Heavy reps\")",
+      "at": "2026-10-09T09:12:14.779Z"
+    },
+    {
+      "kind": "screen-event",
+      "text": "Builder applied local OpenUI data: count1 = Keyword(\"<img src=x onerror=alert(1)>\", \"XSS Test\")",
+      "at": "2026-10-09T09:12:14.860Z"
+    },
+    {
+      "kind": "input",
+      "text": "next",
+      "at": "2026-10-09T09:12:14.900Z"
+    },
+    {
+      "kind": "error",
+      "text": "Simulated invalid component schema. Retry this turn.",
+      "at": "2026-10-09T09:12:15.257Z"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Great pace! Advancing to the next block.\"\n```openui\nroot = Screens([page1, page2, page3, page4], page2)\n```"
+        },
+        "versions": {
+          "app": "2.0.0",
+          "schema": "3",
+          "skillHash": "946cdd7dc35769384238d5257f38b9f14a07baa0e85a1c6eb67a77bc5ba5f4d0",
+          "protocolHash": "5eaf9b08022c08ed147bd3a8ced6e5fe25044c80d5eb009db819eaa1719391bf",
+          "mode": "mock",
+          "provider": "mock",
+          "model": "wiring-fixture-v1",
+          "returnedModel": null,
+          "runtimeVersion": null,
+          "restrictionProfile": null
+        }
+      },
+      "at": "2026-10-09T09:12:15.895Z"
+    },
+    {
+      "kind": "input",
+      "text": "next",
+      "at": "2026-10-09T09:12:16.396Z"
+    },
+    {
+      "kind": "error",
+      "text": "Simulated model request failure. Retry this turn.",
+      "at": "2026-10-09T09:12:16.752Z"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Great pace! Advancing to the next block.\"\n```openui\nroot = Screens([page1, page2, page3, page4], page3)\n```"
+        },
+        "versions": {
+          "app": "2.0.0",
+          "schema": "3",
+          "skillHash": "946cdd7dc35769384238d5257f38b9f14a07baa0e85a1c6eb67a77bc5ba5f4d0",
+          "protocolHash": "5eaf9b08022c08ed147bd3a8ced6e5fe25044c80d5eb009db819eaa1719391bf",
+          "mode": "mock",
+          "provider": "mock",
+          "model": "wiring-fixture-v1",
+          "returnedModel": null,
+          "runtimeVersion": null,
+          "restrictionProfile": null
+        }
+      },
+      "at": "2026-10-09T09:12:17.390Z"
+    },
+    {
+      "kind": "input",
+      "text": "/demo",
+      "at": "2026-10-09T09:12:17.880Z"
+    },
+    {
+      "kind": "interrupted",
+      "at": "2026-10-09T09:12:17.926Z"
+    },
+    {
+      "kind": "input",
+      "text": "next",
+      "at": "2026-10-09T09:12:17.927Z"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Great pace! Advancing to the next block.\"\n```openui\nroot = Screens([page1, page2, page3, page4], page4)\n```"
+        },
+        "versions": {
+          "app": "2.0.0",
+          "schema": "3",
+          "skillHash": "946cdd7dc35769384238d5257f38b9f14a07baa0e85a1c6eb67a77bc5ba5f4d0",
+          "protocolHash": "5eaf9b08022c08ed147bd3a8ced6e5fe25044c80d5eb009db819eaa1719391bf",
+          "mode": "mock",
+          "provider": "mock",
+          "model": "wiring-fixture-v1",
+          "returnedModel": null,
+          "runtimeVersion": null,
+          "restrictionProfile": null
+        }
+      },
+      "at": "2026-10-09T09:12:18.286Z"
+    }
+  ],
+  "state": {
+    "ui_state": "root = Screens([page1, page2, page3, page4], page4)\npage1 = Screen([heading1, count1, note1, cue1])\nheading1 = Text(\"Component sample A\", \"title\")\ncount1 = Keyword(\"<img src=x onerror=alert(1)>\", \"XSS Test\")\nnote1 = Text(\"Generic offline fixture.\")\ncue1 = Cue(\"Text associated with the current screen.\")\npage2 = Screen([heading2, timer1, cue2])\nheading2 = Text(\"Component sample B\", \"title\")\ntimer1 = Timer(\"Sample timer\", 10)\ncue2 = Cue(\"This sample displays a timer component.\")\npage3 = Screen([heading3, count2, cue3])\nheading3 = Text(\"Component sample C\", \"title\")\ncount2 = Keyword(\"8\", \"Second sample value\")\ncue3 = Cue(\"This sample displays another named value.\")\npage4 = Screen([heading4, note4])\nheading4 = Text(\"Component sample D\", \"title\")\nnote4 = Text(\"Generic text component.\")",
+    "client_events": []
+  },
+  "timers": [
+    {
+      "id": "timer1",
+      "label": "Sample timer",
+      "seconds": 10,
+      "remaining": 10,
+      "status": "stopped"
+    }
+  ]
+}

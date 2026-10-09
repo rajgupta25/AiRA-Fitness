@@ -1,0 +1,100 @@
+{
+  "format": "aira-workout-run-v1",
+  "label": "hiit-adaptive-intake",
+  "appVersion": "2.0.0",
+  "schemaVersion": "1.0.0",
+  "selectedProvider": "mock",
+  "note": "Complete metabolic HIIT session with 3-question chat intake, automatic knee regression to box squats, and final celebration summary.",
+  "events": [
+    {
+      "kind": "input",
+      "text": "start hiit workout intake: 15m High"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Metabolic HIIT initiated (15m · High)! Let's dial in your 3-point athlete profile directly here in chat.\n\nQuestion 1 of 3: What is your primary training goal today?\n[A] Explosive Power & Anaerobic Capacity\n[B] Maximum Calorie Burn & Conditioning\n[C] Athletic Agility & Quickness\"\n```openui\nroot = Screens([i_screen], i_screen)\ni_screen = Screen([i_title, i_desc, i_b1, i_b2, i_b3, i_cue, i_options])\ni_title = Text(\"Coach Aira · Smart Training Intake\", \"title\")\ni_desc = Text(\"Let's calibrate today's session based on your real-time physiological readiness, energy baseline, and target outcomes. Select your primary intent below to generate your custom protocol.\", \"description\")\ni_b1 = MetricBadge(\"Athlete Status\", \"Ready to Train\", \"cyan\")\ni_b2 = MetricBadge(\"Engine\", \"Adaptive AI\", \"volt\")\ni_b3 = MetricBadge(\"Readiness Score\", \"94% Optimized\", \"fire\")\ni_cue = Cue(\"Welcome to the studio, athlete! Before we lock in your session, let's calibrate: What is your primary physical objective and training intensity today?\")\ni_options = FollowUps([\"Metabolic HIIT (15m · Zone 4/5 Explosive Burn)\", \"Compound Strength (20m · Hypertrophy Overload)\", \"Mobility & Core (12m · Joint Restoration)\"])\n```"
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    },
+    {
+      "kind": "input",
+      "text": "Explosive Power & Anaerobic Capacity"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Goal locked! Question 2 of 3: Which muscle groups or movement patterns do you want to prioritize today?\n[A] Chest, Shoulders & Triceps (Push Focus)\n[B] Back, Lats & Biceps (Pull Focus)\n[C] Quads, Hamstrings & Glutes (Legs Focus)\n[D] Full-Body Compound Chains\""
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    },
+    {
+      "kind": "input",
+      "text": "Chest, Shoulders & Triceps (Push Focus)"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Target muscle chain registered! Question 3 of 3: Do you have any joint tweaks, soreness, or limitations today?\n[A] No restrictions · 100% Ready to Push\n[B] Sensitive Knees (Low-Impact Variations)\n[C] Lower Back Tightness (Core Protection)\n[D] Shoulder Discomfort (Neutral Grip Cues)\""
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    },
+    {
+      "kind": "input",
+      "text": "Sensitive Knees (Low-Impact Variations)"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"3-point calibration complete! Your tailored protocol is ready on the Active Workout Stage.\n• Target Focus: Locked\n• Biomechanical Safeguards: Low-Impact Knee Regressions Enabled\n• Energy System: Zone 4 High Output\n\nHit Next on the stage stepper to launch Drill 1!\"\n```openui\nroot = Screens([])\n```\n```openui\nroot = Screens([w_intro, w_drill1, w_rest1, w_drill2, w_rest2, w_drill3, w_summary], w_intro)\nw_intro = Screen([intro_title, intro_desc, badge_dur, badge_cal, badge_lvl, intro_cue, intro_options])\nintro_title = Text(\"Coach Aira · 15-Min High Voltage Circuit\", \"title\")\nintro_desc = Text(\"Welcome to today's metabolic burn session. Combining functional compound movements with active recovery intervals. Focus on disciplined tempo and explosive power.\", \"description\")\nbadge_dur = MetricBadge(\"Duration\", \"15 Mins\", \"cyan\")\nbadge_cal = MetricBadge(\"Est. Burn\", \"210 kcal\", \"fire\")\nbadge_lvl = MetricBadge(\"Target Zone\", \"Zone 4\", \"volt\")\nintro_cue = Cue(\"Lace up, athlete! Today's session is built to test your endurance and power. 3 high-intensity drills with active recovery. Hit Next when ready to begin!\")\nintro_options = FollowUps([\"Next\", \"Swap to Strength\", \"Form tips\"])\nw_drill1 = Screen([d1_card, d1_stat, d1_cue, d1_next])\nd1_card = ExerciseCard(\"Bodyweight Box Squat\", \"Quads & Glutes (Low Impact)\", \"3 Sets · 10 Controlled Reps\", \"Sit back gently onto a chair or bench to eliminate joint shear stress while loading muscles.\")\nd1_stat = MetricBadge(\"Tempo Target\", \"3s Down · 1s Up\", \"volt\")\nd1_cue = Cue(\"Drill 1: Dumbbell Goblet Squats! Brace your abs like you are taking a punch, sit deep into your hips, and explode upward!\")\nd1_next = FollowUps([\"Completed set\", \"Need easier variation\", \"My knees hurt\", \"Make it harder\"])\nw_rest1 = Screen([r1_title, r1_timer, r1_cue, r1_actions])\nr1_title = Text(\"Active Recovery · Deep Breaths\", \"title\")\nr1_timer = Timer(\"Rest Interval\", 45)\nr1_cue = Cue(\"Shake out your legs, athlete. Sip some water and regulate your breathing: 4-second inhale through the nose, 4-second exhale.\")\nr1_actions = FollowUps([\"Skip rest timer\", \"Extend rest +15s\", \"Breathing cadence\"])\nw_drill2 = Screen([d2_card, d2_stat, d2_cue, d2_next])\nd2_card = ExerciseCard(\"Explosive Push-Up to Mountain Climber\", \"Chest, Shoulders & Core\", \"45 Seconds Max Effort\", \"Maintain a rigid plank line. Do not let your lower back sag as fatigue sets in.\")\nd2_stat = MetricBadge(\"Intensity\", \"Peak Heart Rate Zone 4\", \"fire\")\nd2_cue = Cue(\"Drill 2: Push-Ups to Mountain Climbers! Push the floor away and keep those knees driving fast!\")\nd2_next = FollowUps([\"Completed drill\", \"Modify to knee push-ups\", \"Too intense\", \"Form tips\"])\nw_rest2 = Screen([r2_title, r2_timer, r2_cue, r2_actions])\nr2_title = Text(\"Hydrate & Reset · Final Round Ahead\", \"title\")\nr2_timer = Timer(\"Pre-Finisher Rest\", 30)\nr2_cue = Cue(\"Only one round left between you and the finish line! Recover quickly—we leave everything on the floor in round 3.\")\nr2_actions = FollowUps([\"Skip to finisher\", \"Extend rest +15s\", \"Breathing cadence\"])\nw_drill3 = Screen([d3_card, d3_stat, d3_cue, d3_next])\nd3_card = ExerciseCard(\"Kettlebell Speed Swings\", \"Posterior Chain, Glutes & Hamstrings\", \"20 Reps Unbroken\", \"Hinge at the hips, do not squat. Snap hips forward with maximum glute contraction at lockout.\")\nd3_stat = MetricBadge(\"Burn Rate\", \"High Explosive Output\", \"fire\")\nd3_cue = Cue(\"Final set! Snap your hips with explosive power. Power comes from your hips, not your arms. Finish strong!\")\nd3_next = FollowUps([\"Completed workout!\", \"Log session\", \"Form tips\"])\nw_summary = Screen([sum_card, sum_note, sum_cue, sum_actions])\nsum_card = WorkoutSummary(\"High Voltage Circuit Conquered\", \"245 kcal\", \"14:38\", \"980 XP\")\nsum_note = Text(\"Incredible work, athlete! You maintained high tempo throughout all 3 working blocks and crushed peak Zone 4 output.\", \"body\")\nsum_cue = Cue(\"Workout complete! Outstanding effort and disciplined form today. Take 5 minutes to stretch, hydrate, and refuel. You earned this victory!\")\nsum_actions = FollowUps([\"Restart workout\", \"Post-workout stretch flow\", \"View telemetry stats\"])\n```"
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    }
+  ],
+  "state": {
+    "ui_state": "root = Screens([w_intro, w_drill1, w_rest1, w_drill2, w_rest2, w_drill3, w_summary], w_summary)",
+    "client_events": [
+      "Now on step 1 of 7",
+      "Now on step 2 of 7",
+      "Now on step 3 of 7",
+      "The timer for Rest Interval finished.",
+      "Now on step 4 of 7",
+      "Now on step 5 of 7",
+      "Now on step 6 of 7",
+      "Now on step 7 of 7",
+      "Reached the final screen. This is not evidence of physical completion."
+    ]
+  },
+  "timers": [
+    {
+      "id": "r1_timer",
+      "label": "Rest Interval",
+      "seconds": 45,
+      "status": "done",
+      "remaining": 0
+    },
+    {
+      "id": "r2_timer",
+      "label": "Pre-Finisher Rest",
+      "seconds": 30,
+      "status": "done",
+      "remaining": 0
+    }
+  ]
+}

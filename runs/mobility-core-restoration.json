@@ -1,0 +1,36 @@
+{
+  "format": "aira-workout-run-v1",
+  "label": "mobility-core-restoration",
+  "appVersion": "2.0.0",
+  "schemaVersion": "1.0.0",
+  "selectedProvider": "mock",
+  "note": "Parasympathetic mobility and core flow session focusing on hip capsule decompressions, spinal articulation, and deep pelvic stabilization.",
+  "events": [
+    {
+      "kind": "input",
+      "text": "start mobility intake: 30m Med"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Mobility & Core Restoration initiated (30m · Med)! Let's tune your movement flow in chat.\n\nQuestion 1 of 3: What is your primary training goal today?\n[A] Joint Decompression & Spinal Mobility\n[B] Deep Core Stabilization & Pelvic Floor\n[C] Post-Lift Tissue Release & Flexibility\"\n```openui\nroot = Screens([m_intro, m_drill1, m_drill2, m_summary], m_intro)\nm_intro = Screen([m_title, m_desc, m_dur, m_cal, m_cue, m_opts])\nm_title = Text(\"Coach Aira · Mobility & Core Restoration\", \"title\")\nm_desc = Text(\"Decompress your spine, unlock your hip capsules, and restore rotational core stability after intense training days.\", \"description\")\nm_dur = MetricBadge(\"Duration\", \"12 Mins\", \"cyan\")\nm_cal = MetricBadge(\"Restoration\", \"Parasympathetic Flow\", \"volt\")\nm_cue = Cue(\"Drop your shoes, athlete. Today we breathe, mobilize sticky joints, and strengthen deep stabilizer muscles. Let us begin!\")\nm_opts = FollowUps([\"Next\", \"Swap to HIIT\"])\nm_drill1 = Screen([md1_card, md1_cue, md1_next])\nmd1_card = ExerciseCard(\"90/90 Hip Capsule Rotations\", \"Hip Internal & External Rotators\", \"10 Controlled Reps per Side\", \"Sit upright with knees bent at 90 degrees. Transition smoothly without lifting hands off floor if possible.\")\nmd1_cue = Cue(\"Breathe into your pelvic floor and hips. Move slow and controlled through the full rotational arc.\")\nmd1_next = FollowUps([\"Completed drill\", \"Ready for core\"])\nm_drill2 = Screen([md2_card, md2_cue, md2_next])\nmd2_card = ExerciseCard(\"Dead Bug with Core Hollow Body Hold\", \"Transverse Abdominis & Pelvic Floor\", \"12 Slow Reps + 15s Isometric Hold\", \"Press lower back firmly into the floor. Lower opposite arm and leg while maintaining abdominal tension.\")\nmd2_cue = Cue(\"No arching through your spine! Crush the ground with your lower back like you are squishing a grape.\")\nmd2_next = FollowUps([\"Finish session\"])\nm_summary = Screen([msum_card, msum_note, msum_cue, msum_actions])\nmsum_card = WorkoutSummary(\"Mobility Flow Complete\", \"95 kcal\", \"12:15\", \"680 XP\")\nmsum_note = Text(\"Deep restorative flow achieved. Your spinal mobility and hip capsules are decompressed and ready for tomorrow's loading.\", \"body\")\nmsum_cue = Cue(\"Restoration complete! Great mindfulness and controlled movement today. Rest up and refuel.\")\nmsum_actions = FollowUps([\"Restart workout\", \"Log session\"])\n```"
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    }
+  ],
+  "state": {
+    "ui_state": "root = Screens([m_intro, m_drill1, m_drill2, m_summary], m_summary)",
+    "client_events": [
+      "Now on step 1 of 4",
+      "Now on step 2 of 4",
+      "Now on step 3 of 4",
+      "Now on step 4 of 4",
+      "Reached the final screen. This is not evidence of physical completion."
+    ]
+  },
+  "timers": []
+}

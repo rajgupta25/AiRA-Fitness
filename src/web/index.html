@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AiRA Fitness · Adaptive Biomechanical Studio</title>
+  <link rel="icon" type="image/png" href="/web/favicon.png">
+  <link rel="stylesheet" href="/web/styles-cool.css" id="theme-style-cool">
+  <link rel="stylesheet" href="/web/styles-calm.css" id="theme-style-calm" disabled>
+  <script>
+    try {
+      var savedMood = localStorage.getItem('aira_mood_mode') || 'cool';
+      if (savedMood === 'calm') {
+        var c = document.getElementById('theme-style-cool');
+        var m = document.getElementById('theme-style-calm');
+        if (c && m) { c.disabled = true; m.disabled = false; }
+        document.documentElement.dataset.mood = 'calm';
+      } else {
+        document.documentElement.dataset.mood = 'cool';
+      }
+    } catch (e) {}
+  </script>
+  <script type="module" src="/web/app.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <!-- Left Studio Navigation & Intent Deck -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/web/logo.png" alt="AiRA Fitness Logo" class="brand-logo-img" width="34" height="34">
+      <span class="brand-title">AiRA<span class="brand-sub">FITNESS</span></span>
+    </div>
+
+    <!-- Choose Workout Style in Sidebar -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-header">
+        <span class="eyebrow"><span class="toi-bar-accent"></span>CHOOSE WORKOUT STYLE</span>
+      </div>
+      <div class="intent-list">
+        <!-- HIIT Intent -->
+        <div class="intent-card-wrapper">
+          <button type="button" class="sidebar-intent-card active" id="intent-hiit">
+            <span class="intent-card-icon icon-flame">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            </span>
+            <div class="intent-card-info">
+              <strong id="hiit-title">Metabolic HIIT</strong>
+              <span id="hiit-meta">15m · Zone 4 Burn</span>
+            </div>
+          </button>
+          <button type="button" class="btn-intent-edit" id="btn-edit-hiit" title="Edit Duration & Intensity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+        </div>
+
+        <!-- Strength Intent -->
+        <div class="intent-card-wrapper">
+          <button type="button" class="sidebar-intent-card" id="intent-strength">
+            <span class="intent-card-icon icon-dumbbell">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>
+            </span>
+            <div class="intent-card-info">
+              <strong id="strength-title">Compound Strength</strong>
+              <span id="strength-meta">20m · Hypertrophy RPE 8</span>
+            </div>
+          </button>
+          <button type="button" class="btn-intent-edit" id="btn-edit-strength" title="Edit Duration & Intensity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+        </div>
+
+        <!-- Mobility Intent -->
+        <div class="intent-card-wrapper">
+          <button type="button" class="sidebar-intent-card" id="intent-mobility">
+            <span class="intent-card-icon icon-mobility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="m4 17 5-3 3 3 5-3 3 3"/><path d="M12 6v6"/></svg>
+            </span>
+            <div class="intent-card-info">
+              <strong id="mobility-title">Mobility & Core</strong>
+              <span id="mobility-meta">12m · Joint Restoration</span>
+            </div>
+          </button>
+          <button type="button" class="btn-intent-edit" id="btn-edit-mobility" title="Edit Duration & Intensity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Modal / Inline Drawer for Customizing Intent -->
+    <div id="intent-customizer" class="intent-customizer-drawer" hidden>
+      <div class="customizer-header">
+        <strong id="customizer-target-name">Customize Protocol</strong>
+        <button type="button" id="btn-close-customizer" class="btn-close-x">&times;</button>
+      </div>
+      <div class="customizer-group">
+        <label>Session Duration</label>
+        <div class="pill-options" id="opt-duration">
+          <button type="button" class="opt-btn active" data-val="15m">15m</button>
+          <button type="button" class="opt-btn" data-val="30m">30m</button>
+          <button type="button" class="opt-btn" data-val="45m">45m</button>
+        </div>
+      </div>
+      <div class="customizer-group">
+        <label>Target Intensity</label>
+        <div class="pill-options" id="opt-intensity">
+          <button type="button" class="opt-btn" data-val="Low">Low</button>
+          <button type="button" class="opt-btn active" data-val="Med">Med</button>
+          <button type="button" class="opt-btn" data-val="High">High</button>
+        </div>
+      </div>
+      <button type="button" id="btn-save-customizer" class="btn-apply-custom">Apply & Launch Protocol</button>
+    </div>
+
+    <!-- Lower Sidebar: Training Calendar & Split History -->
+    <div class="sidebar-section calendar-section">
+      <div class="sidebar-section-header">
+        <span class="eyebrow"><span class="toi-bar-accent"></span>TRAINING SPLIT LOG</span>
+      </div>
+      <div class="calendar-prediction-card">
+        <div class="prediction-tag">AI PREDICTION</div>
+        <strong id="prediction-title">Pull & Core Tomorrow</strong>
+        <span class="micro" id="prediction-sub">Based on 3-day PPL cycle</span>
+      </div>
+      <div class="calendar-history-list" id="calendar-history">
+        <button type="button" class="calendar-item" data-session="push">
+          <div class="cal-date-col">
+            <span class="cal-day">Sat</span>
+            <span class="cal-num">13 Feb</span>
+          </div>
+          <div class="cal-info-col">
+            <strong>Chest & Shoulders</strong>
+            <span class="cal-badge badge-high">High</span>
+          </div>
+        </button>
+        <button type="button" class="calendar-item" data-session="legs">
+          <div class="cal-date-col">
+            <span class="cal-day">Thu</span>
+            <span class="cal-num">11 Feb</span>
+          </div>
+          <div class="cal-info-col">
+            <strong>Quads & Calves</strong>
+            <span class="cal-badge badge-med">Med</span>
+          </div>
+        </button>
+        <button type="button" class="calendar-item" data-session="mobility">
+          <div class="cal-date-col">
+            <span class="cal-day">Wed</span>
+            <span class="cal-num">10 Feb</span>
+          </div>
+          <div class="cal-info-col">
+            <strong>Spine & Hip Flow</strong>
+            <span class="cal-badge badge-low">Low</span>
+          </div>
+        </button>
+        <button type="button" class="calendar-item" data-session="pull">
+          <div class="cal-date-col">
+            <span class="cal-day">Mon</span>
+            <span class="cal-num">08 Feb</span>
+          </div>
+          <div class="cal-info-col">
+            <strong>Heavy Back & Core</strong>
+            <span class="cal-badge badge-high">High</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="sample" type="button" class="btn-sidebar btn-sample">Load wiring sample</button>
+      <div class="trainer-status-card">
+        <div class="trainer-avatar">A</div>
+        <div class="trainer-meta">
+          <strong>Coach Aira</strong>
+          <span class="micro online-dot">● Engine Ready</span>
+        </div>
+      </div>
+      <button id="reset" class="btn-sidebar">Reset Run</button>
+    </div>
+  </aside>
+
+  <!-- Main Studio Content Area -->
+  <main class="studio-main">
+    <!-- Top Bar -->
+    <header class="studio-topbar toi-topbar">
+      <div class="topbar-welcome">
+        <div class="toi-headline-row">
+          <h1>Welcome Back, Athlete!</h1>
+          <span class="toi-tag-online">● LIVE BIO-SYNC</span>
+        </div>
+        <p class="subtitle">AI Adaptive Performance Studio · Real-Time Biomechanical Guidance</p>
+      </div>
+      <div class="topbar-actions">
+        <!-- Mood Mode Selector: Cool mode (default) & Calm mode -->
+        <div class="mood-mode-wrapper">
+          <span class="mood-mode-title"><span class="toi-bar-accent"></span>Mood Mode</span>
+          <div class="mood-mode-toggle" id="mood-mode-toggle" role="radiogroup" aria-label="Mood Mode Selector">
+            <button type="button" class="mood-toggle-btn active" id="btn-mood-cool" data-mood="cool" role="radio" aria-checked="true" title="Switch to Cool Mode">Cool</button>
+            <button type="button" class="mood-toggle-btn" id="btn-mood-calm" data-mood="calm" role="radio" aria-checked="false" title="Switch to Calm Mode">Calm</button>
+          </div>
+        </div>
+        <div class="toi-clock-sync" id="toi-sync-clock">Session Sync: 00:00</div>
+        <button type="button" id="btn-athlete-profile" class="btn-profile-trigger">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="profile-label">Athlete Bio</span>
+          <span class="profile-stat-pill" id="profile-pill-val">78kg · BMI 23.5</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Quick Stat Highlights Row -->
+    <section class="stat-highlight-row">
+      <div class="stat-card stat-card-highlight">
+        <div class="stat-card-meta">
+          <div class="stat-card-header-row">
+            <span class="stat-card-label">Active Session Burn</span>
+            <button type="button" class="stat-info-btn" aria-label="Learn about Active Session Burn" data-stat-info="burn" title="About Active Session Burn">i</button>
+          </div>
+          <strong class="stat-card-value" id="stat-burn-val">0 kcal</strong>
+          <span class="stat-card-sub" id="stat-burn-sub">Resting baseline</span>
+          <div class="stat-info-popover" id="stat-info-burn" role="tooltip">
+            <div class="stat-info-popover-title">Active Session Burn</div>
+            <p class="stat-info-popover-desc">Dynamic metabolic energy expenditure tracked continuously across exercises. Calculates active calories burned based on exercise MET intensity, working tempo, and user body profile.</p>
+            <div class="stat-info-popover-meta">Calculation: MET × Body Mass (kg) × Active Duration</div>
+          </div>
+        </div>
+        <div class="stat-card-media" id="media-burn-gif">
+          <img src="https://res.cloudinary.com/dlgcd5agt/image/upload/v1791490159/giphy_3_bgfnrv.gif" alt="Active Session Burn Telemetry" class="stat-telemetry-gif gif-burn" width="44" height="44">
+        </div>
+        <div class="stat-graphic-wave" id="graphic-burn-wave"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-meta">
+          <div class="stat-card-header-row">
+            <span class="stat-card-label">Intensity Target</span>
+            <button type="button" class="stat-info-btn" aria-label="Learn about Intensity Target" data-stat-info="intensity" title="About Intensity Target">i</button>
+          </div>
+          <strong class="stat-card-value" id="stat-zone-val">Zone 1 (55%)</strong>
+          <span class="stat-tag tag-orange" id="stat-zone-tag">Baseline</span>
+          <div class="stat-info-popover" id="stat-info-intensity" role="tooltip">
+            <div class="stat-info-popover-title">Intensity Target</div>
+            <p class="stat-info-popover-desc">Cardiovascular exertion tracking calibrated across 5 athletic heart rate zones. Guides whether the current drill demands aerobic base building, lactate threshold endurance, or anaerobic peak redline effort.</p>
+            <div class="stat-info-popover-meta">Zones: 1 Warmup · 2 Aerobic · 3 Tempo · 4 Anaerobic · 5 Redline</div>
+          </div>
+        </div>
+        <div class="stat-card-media" id="media-intensity-gif">
+          <img src="https://res.cloudinary.com/dlgcd5agt/image/upload/v1791491183/giphy_6_jr7mid.gif" alt="Intensity Target Telemetry" class="stat-telemetry-gif gif-intensity" width="44" height="44">
+        </div>
+        <div class="stat-graphic-bars" id="stat-zone-bars">
+          <span style="height:35%" class="active"></span>
+          <span style="height:55%"></span>
+          <span style="height:70%"></span>
+          <span style="height:92%"></span>
+          <span style="height:45%"></span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-meta">
+          <div class="stat-card-header-row">
+            <span class="stat-card-label">Session Progress</span>
+            <button type="button" class="stat-info-btn" aria-label="Learn about Session Progress and Circuit Pace" data-stat-info="progress" title="About Session Progress & Circuit Pace">i</button>
+          </div>
+          <strong class="stat-card-value" id="stat-pace-val">00:00</strong>
+          <span class="stat-tag tag-green" id="stat-pace-tag">Ready · Block 0/3</span>
+          <div class="stat-info-popover stat-info-popover-right" id="stat-info-progress" role="tooltip">
+            <div class="stat-info-popover-title">Session Progress & Circuit Pace</div>
+            <p class="stat-info-popover-desc">Live workout velocity and circuit progression monitor. Tracks time-in-block against overall session plan, visualizing total split completion via the circular telemetry ring.</p>
+            <div class="stat-info-popover-meta">Telemetry: Real-time interval pacing & completion %</div>
+          </div>
+        </div>
+        <div class="circular-progress" id="circular-progress">
+          <span class="circle-val" id="stat-pace-pct">0%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Workspace Grid (100% Fit On Screen) -->
+    <div class="workspace">
+      <!-- Left Column: Active Workout Stage + Voice Cue Lane -->
+      <div class="workout-stage-column">
+        <!-- Active Workout Stage -->
+        <section class="preview">
+          <div class="panel-heading">
+            <h2><span class="toi-bar-accent"></span>ACTIVE WORKOUT STAGE</h2>
+            <div class="stage-top-controls" id="navigation" aria-label="Stepper" hidden>
+              <span id="position" class="micro position-badge"></span>
+              <button id="back" class="btn-stepper-back" title="Previous exercise">←</button>
+              <button id="pause" class="btn-stepper-pause" disabled title="Pause preview">Pause</button>
+              <button id="next" class="primary btn-next-top">Next →</button>
+            </div>
+          </div>
+          <div id="pending" class="notice" hidden>Reply pending · previous screen stays available</div>
+          <div id="paused" class="notice" hidden>Preview paused. Your place is kept.</div>
+          <div id="progress" class="progress" aria-label="Screen progress"></div>
+          <div id="split-tracker" class="split-tracker" hidden></div>
+          <div id="screen"></div>
+        </section>
+
+        <!-- Spoken-Text Lane is directly below the workout stage for seamless focus -->
+        <section class="spoken" id="spoken-lane">
+          <div class="spoken-header">
+            <div class="spoken-header-title-row">
+              <h2><span class="toi-bar-accent"></span>Coach LIVE Training</h2>
+              <span class="audio-notice-pill" title="Audio based coaching coming soon">
+                <svg class="audio-notice-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+                Audio based training coming soon!
+              </span>
+            </div>
+            <div class="voice-hud-indicator">
+              <span class="voice-pulse-dot"></span>
+              <span class="micro">COACH AIRA LIVE</span>
+              <div class="voice-wave-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <p id="spoken"></p>
+          <span class="micro spoken-sub" style="display:none;">Real-time coaching voice prompts delivered as dynamic audio guidance.</span>
+        </section>
+      </div>
+
+      <!-- Right Column: Dedicated Full-Height Chat Terminal & Response Chips -->
+      <section class="conversation">
+        <div class="panel-heading chat-panel-heading">
+          <h2><span class="toi-bar-accent"></span>CHAT WITH COACH AIRA</h2>
+          <div class="chat-status-indicator">
+            <span class="chat-pulse-dot"></span>
+            <span class="micro">AI ADAPTIVE COACH</span>
+          </div>
+        </div>
+        <div id="transcript" role="log" aria-label="Conversation transcript"></div>
+
+        <div id="error" role="alert" hidden>
+          <p id="error-message"></p>
+          <button id="retry">Retry last turn</button>
+        </div>
+
+        <form id="composer">
+          <label for="message" id="status" role="status" style="display:none;" aria-hidden="true"></label>
+          <div class="composer-input-box">
+            <textarea id="message" maxlength="2000" rows="2" placeholder="Ask Coach Aira or adjust session..."></textarea>
+            <button id="send" class="composer-send-btn" aria-label="Send" title="Send" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </button>
+          </div>
+        </form>
+        <button id="cancel" disabled type="button" style="display:none;" aria-hidden="true"></button>
+      </section>
+    </div>
+
+    <!-- Collapsible Builder Suite & Engine Provider Controls -->
+    <div class="developer-tools-strip">
+      <details class="builder" id="builder">
+        <summary>Builder tools <span class="micro">Inspect the protocol. Test a failure. Capture evidence.</span></summary>
+        <div class="tools-grid">
+          <section>
+            <h3>Try a local patch</h3>
+            <p class="micro">OpenUI data only. This does not edit your skill or source files. Use a stable existing name to patch it.</p>
+            <label for="patch">Statement(s)</label>
+            <textarea id="patch" rows="4" spellcheck="false" placeholder='count1 = Keyword("6", "Sample value")'></textarea>
+            <button id="apply-patch">Apply local patch</button>
+            <p id="patch-status" role="status" class="micro"></p>
+            <details>
+              <summary>What the model receives next</summary>
+              <pre id="state-json"></pre>
+            </details>
+          </section>
+          <section>
+            <h3>Test and capture</h3>
+            <div id="mock-controls">
+              <label for="fault">Next mock response</label>
+              <select id="fault">
+                <option value="none">Normal</option>
+                <option value="slow">Slow · try interrupting</option>
+                <option value="schema">Invalid OpenUI schema</option>
+                <option value="request">Failed request</option>
+              </select>
+            </div>
+            <label for="run-label">Run label</label>
+            <select id="run-label">
+              <option value="before">Before</option>
+              <option value="after">After</option>
+            </select>
+            <label for="note">What did you learn?</label>
+            <textarea id="note" rows="3" maxlength="2000" placeholder="Optional run note."></textarea>
+            <button id="export">Download run JSON</button>
+            <p id="export-status" class="micro" role="status">Manual capture. Review and move exports into runs/.</p>
+          </section>
+        </div>
+      </details>
+
+      <section class="provider-panel">
+        <label for="provider">Engine</label>
+        <select id="provider" disabled><option>Connecting…</option></select>
+        <strong id="mode">Connecting</strong>
+        <label id="consent-wrap" hidden>
+          <input type="checkbox" id="consent"> <span id="consent-label"></span>
+        </label>
+        <p id="provider-description" class="micro provider-desc" style="display:none;"></p>
+      </section>
+    </div>
+
+    <footer>
+      Build a coherent synthetic workout experience. The fixture is only a wiring check.<br>
+      Read README.md and docs/EXERCISE.md before starting. No exercise is required.
+    </footer>
+  </main>
+</div>
+
+<!-- Athlete Profile & Health Diagnostics Modal -->
+<dialog id="profile-modal" class="athlete-modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div>
+        <h3>Athlete Profile & Health Diagnostics</h3>
+        <p class="micro">Grounds Coach Aira's AI memory, exercise regressions, and calorie algorithms</p>
+      </div>
+      <button type="button" id="btn-close-profile" class="btn-close-x">&times;</button>
+    </div>
+    <form id="profile-form" class="modal-body">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="prof-height">Height (cm)</label>
+          <input type="number" id="prof-height" value="182" min="120" max="230">
+        </div>
+        <div class="form-group">
+          <label for="prof-weight">Weight (kg)</label>
+          <input type="number" id="prof-weight" value="78" min="30" max="250">
+        </div>
+      </div>
+      <div class="bmi-indicator-bar">
+        <span class="micro">CALCULATED BMI:</span>
+        <strong id="prof-bmi-val">23.5 · Healthy Weight</strong>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="prof-fat">Body Fat % (Optional)</label>
+          <input type="number" id="prof-fat" value="14.5" min="4" max="50" step="0.5">
+        </div>
+        <div class="form-group">
+          <label for="prof-muscle">Skeletal Muscle %</label>
+          <input type="number" id="prof-muscle" value="42.0" min="15" max="65" step="0.5">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="prof-split">Training Split Preference</label>
+        <select id="prof-split">
+          <option value="ppl" selected>Push / Pull / Legs (PPL)</option>
+          <option value="upper_lower">Upper / Lower Body (4-Day)</option>
+          <option value="full_body">Full Body Athletic (3-Day)</option>
+          <option value="bro_split">Bodypart Split (Bro Split)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Joint Restrictions & Injury Care</label>
+        <div class="injury-chips-grid">
+          <label class="injury-chip"><input type="checkbox" id="inj-knee"> <span>Knee Sensitivity</span></label>
+          <label class="injury-chip"><input type="checkbox" id="inj-back"> <span>Lower Back Care</span></label>
+          <label class="injury-chip"><input type="checkbox" id="inj-shoulder"> <span>Shoulder Impingement</span></label>
+          <label class="injury-chip"><input type="checkbox" id="inj-wrist"> <span>Wrist / Grip Care</span></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-save-profile">Save & Sync with Coach Aira</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "format": "aira-workout-run-v1",
+  "label": "compound-strength-progression",
+  "appVersion": "2.0.0",
+  "schemaVersion": "1.0.0",
+  "selectedProvider": "mock",
+  "note": "Compound strength protocol emphasizing time under tension, mechanical overload at RPE 8.5, and strict tempo compliance.",
+  "events": [
+    {
+      "kind": "input",
+      "text": "start compound strength intake: 1.0h High"
+    },
+    {
+      "kind": "response",
+      "result": {
+        "turn": {
+          "reply": "Coach Aira: \"Compound Strength initiated (1.0h · High)! Let's calibrate your volume and loads directly in chat.\n\nQuestion 1 of 3: What is your primary training goal today?\n[A] Hypertrophy & Muscle Growth (RPE 8)\n[B] Max Strength & Heavy Loading (RPE 9)\n[C] Functional Power & Joint Stability\"\n```openui\nroot = Screens([s_intro, s_drill1, s_rest1, s_drill2, s_summary], s_intro)\ns_intro = Screen([s_title, s_desc, s_dur, s_cal, s_lvl, s_cue, s_opts])\ns_title = Text(\"Coach Aira · Compound Strength Protocol\", \"title\")\ns_desc = Text(\"Dedicated hypertrophy session focusing on time under tension, mechanical overload, and pristine biomechanics.\", \"description\")\ns_dur = MetricBadge(\"Target Duration\", \"20 Mins\", \"cyan\")\ns_cal = MetricBadge(\"Est. Burn\", \"190 kcal\", \"volt\")\ns_lvl = MetricBadge(\"Lifting Zone\", \"Hypertrophy RPE 8\", \"fire\")\ns_cue = Cue(\"Grab your dumbbells, athlete. Today we prioritize tempo and mind-muscle connection. Slow eccentric, explosive concentric. Hit Next when ready!\")\ns_opts = FollowUps([\"Next\", \"Swap to HIIT\", \"Form cues\"])\ns_drill1 = Screen([sd1_card, sd1_stat, sd1_cue, sd1_next])\nsd1_card = ExerciseCard(\"Heavy Dumbbell Romanian Deadlift\", \"Hamstrings, Glutes & Spinal Erectors\", \"4 Sets · 10 Reps (3-1-1 Tempo)\", \"Soft bend in knees, push hips back to the wall behind you, keep lats engaged.\")\nsd1_stat = MetricBadge(\"Target RPE\", \"RPE 8.5 · 2 Reps in Reserve\", \"volt\")\nsd1_cue = Cue(\"Focus on the stretch in your hamstrings. Do not round your lower back. Hinge deep and drive through your heels!\")\nsd1_next = FollowUps([\"Completed set\", \"My lower back feels tight\", \"Make it harder\"])\ns_rest1 = Screen([sr1_title, sr1_timer, sr1_cue, sr1_actions])\nsr1_title = Text(\"Hypertrophy Rest Interval · 60s\", \"title\")\nsr1_timer = Timer(\"Strength Recovery Rest\", 60)\nsr1_cue = Cue(\"Full recovery is key for muscle growth. Let your heart rate normalize and prepare your nervous system for the next heavy set.\")\nsr1_actions = FollowUps([\"Skip rest timer\", \"Ready for set 2\"])\ns_drill2 = Screen([sd2_card, sd2_stat, sd2_cue, sd2_next])\nsd2_card = ExerciseCard(\"Neutral-Grip Dumbbell Overhead Press\", \"Deltoids, Upper Chest & Triceps\", \"3 Sets · 10 Reps\", \"Tuck elbows slightly forward at 45 degrees. Lock out overhead with head pushed gently through.\")\nsd2_stat = MetricBadge(\"Overload\", \"Progressive Weight Load\", \"fire\")\nsd2_cue = Cue(\"Press the dumbbells ceiling-ward! Keep your glutes squeezed tight to prevent overarching your lumbar spine.\")\nsd2_next = FollowUps([\"Completed drill\", \"Shoulder discomfort\", \"Finish workout\"])\ns_summary = Screen([ssum_card, ssum_note, ssum_cue, ssum_actions])\nssum_card = WorkoutSummary(\"Strength Protocol Completed\", \"210 kcal\", \"19:45\", \"1050 XP\")\nssum_note = Text(\"Phenomenal mechanical loading! You logged heavy volume with pristine joint alignment. Prioritize protein and recovery today.\", \"body\")\nssum_cue = Cue(\"Heavy lifting complete! Outstanding discipline on your tempos today. Rehydrate and enjoy the post-workout endorphins!\")\nssum_actions = FollowUps([\"Restart workout\", \"View stats\"])\n```"
+        },
+        "versions": {
+          "protocolHash": "615b1fb671a9e2d3bb9c54e195cf58a52b22ec76b39a77918a096c42171bf731"
+        }
+      }
+    }
+  ],
+  "state": {
+    "ui_state": "root = Screens([s_intro, s_drill1, s_rest1, s_drill2, s_summary], s_summary)",
+    "client_events": [
+      "Now on step 1 of 5",
+      "Now on step 2 of 5",
+      "Now on step 3 of 5",
+      "The timer for Strength Recovery Rest finished.",
+      "Now on step 4 of 5",
+      "Now on step 5 of 5",
+      "Reached the final screen. This is not evidence of physical completion."
+    ]
+  },
+  "timers": [
+    {
+      "id": "sr1_timer",
+      "label": "Strength Recovery Rest",
+      "seconds": 60,
+      "status": "done",
+      "remaining": 0
+    }
+  ]
+}

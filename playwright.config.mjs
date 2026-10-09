@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test';
+export default defineConfig({testDir:'tests/browser',workers:1,timeout:20000,use:{baseURL:'http://127.0.0.1:4320',headless:true,launchOptions:process.env.PLAYWRIGHT_CHROME_PATH?{executablePath:process.env.PLAYWRIGHT_CHROME_PATH}:{}},webServer:{command:'node dist/server/main.js',url:'http://127.0.0.1:4320',reuseExistingServer:false,env:{PORT:'4320',APP_MODE:'mock',ALLOW_LIVE_API:'false',OPENAI_API_KEY:'',ALLOW_CLAUDE_CLI:'false'}}});
